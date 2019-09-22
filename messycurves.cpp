@@ -112,3 +112,7 @@ int main(int argc, const char* argv[])
     imwrite(image_out_name,ima_messy);
     return 0;
 }
+
+/*
+ * https://answers.opencv.org/question/68215/how-do-i-cast-point2f-to-point2d/
+ * */
