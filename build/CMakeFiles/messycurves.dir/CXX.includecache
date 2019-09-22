@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/shared/foss/MessyCurves/PerlinNoise.h
+vector
+-
+
 /shared/foss/MessyCurves/messycurves.cpp
 iostream
 -
@@ -17,6 +21,8 @@ opencv2/opencv.hpp
 -
 opencv2/highgui/highgui.hpp
 -
+PerlinNoise.h
+/shared/foss/MessyCurves/PerlinNoise.h
 
 /usr/local/include/opencv/cxcore.h
 opencv2/core/core_c.h

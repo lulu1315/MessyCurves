@@ -124,6 +124,21 @@ messycurves/fast:
 .PHONY : messycurves/fast
 
 # target to build an object file
+PerlinNoise.o:
+	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/PerlinNoise.o
+.PHONY : PerlinNoise.o
+
+# target to preprocess a source file
+PerlinNoise.i:
+	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/PerlinNoise.i
+.PHONY : PerlinNoise.i
+
+# target to generate assembly for a file
+PerlinNoise.s:
+	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/PerlinNoise.s
+.PHONY : PerlinNoise.s
+
+# target to build an object file
 messycurves.o:
 	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/messycurves.o
 .PHONY : messycurves.o
@@ -147,6 +162,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... messycurves"
 	@echo "... edit_cache"
+	@echo "... PerlinNoise.o"
+	@echo "... PerlinNoise.i"
+	@echo "... PerlinNoise.s"
 	@echo "... messycurves.o"
 	@echo "... messycurves.i"
 	@echo "... messycurves.s"

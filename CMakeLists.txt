@@ -11,6 +11,7 @@ LINK_DIRECTORIES(${OpenCV_LIB_DIR})
 
 ADD_EXECUTABLE(
   messycurves
+  PerlinNoise.cpp
   messycurves.cpp
 )
 
