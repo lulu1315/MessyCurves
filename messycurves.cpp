@@ -269,11 +269,11 @@ int main(int argc, const char* argv[])
     Mat ima_messy(ima_in.rows, ima_in.cols, CV_8UC1, Scalar(255));
     
     //parameters
-    float   zstep=0.001;
+    float   zstep=0.005;
     int     maxCount=50;
-    float   maxSpeed=10.0;
+    float   maxSpeed=5.0;
     //pixelforce
-    float   pixelInfluence=10.;
+    float   pixelInfluence=8.;
     float   tangentInfluence=pixelInfluence/5;
     int     halfperception=2;
     float   pixeldiv=100.;
@@ -281,7 +281,7 @@ int main(int argc, const char* argv[])
     bool    donoiseforce=true;
     float   noiseInfluence=.05;
     float   noisepower=5; // sigmoid
-    int     fnnoisetype=5;
+    int     fnnoisetype=4;
     int     fnseed=1337;
     float   fnfrequency=.005;
     int     fnoctaves=3;
@@ -289,13 +289,13 @@ int main(int argc, const char* argv[])
     float   fngain=0.5;
     //boundforce
     bool    doboundforce=true;
-    float   bound=200;
-    float   boundForceFactor=.5; //0.16;
-    float   boundSuperness=2;
+    float   bound=60;
+    float   boundForceFactor=.3; //0.16;
+    float   boundSuperness=5;
     //display
     float   lineopacity=.2;
-    int     lumtreshold=80;
-    int     masksampling=20; //undersampling of mask
+    int     lumtreshold=180;
+    int     masksampling=50; //undersampling of mask
     //initialize fastnoise
     //https://github.com/Auburns/FastNoise
     cout << "initializing fast noise"  << endl;
