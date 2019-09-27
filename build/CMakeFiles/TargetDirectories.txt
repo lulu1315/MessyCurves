@@ -1,3 +1,4 @@
-/shared/foss/MessyCurves/build/CMakeFiles/rebuild_cache.dir
-/shared/foss/MessyCurves/build/CMakeFiles/messycurves.dir
-/shared/foss/MessyCurves/build/CMakeFiles/edit_cache.dir
+/shared/foss-18/MessyCurves/build/CMakeFiles/rebuild_cache.dir
+/shared/foss-18/MessyCurves/build/CMakeFiles/messycurves.dir
+/shared/foss-18/MessyCurves/build/CMakeFiles/edit_cache.dir
+/shared/foss-18/MessyCurves/build/CMakeFiles/messycurves_random.dir
