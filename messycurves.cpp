@@ -436,3 +436,5 @@ while (true) {
 	}//end for
 }//end while()
 }//end main
+
+//gmic blondie1.jpg -fx_normalize_local 2,6,5,40,1,11,0,50,50 -o blondie1_normalize.png
