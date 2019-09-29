@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/messycurves.dir/PerlinNoise.o"
   "CMakeFiles/messycurves.dir/FastNoise.o"
   "CMakeFiles/messycurves.dir/messycurves.o"
   "messycurves.pdb"

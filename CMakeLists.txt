@@ -11,26 +11,13 @@ LINK_DIRECTORIES(${OpenCV_LIB_DIR})
 
 ADD_EXECUTABLE(
   messycurves
-  PerlinNoise.cpp
   FastNoise.cpp
   messycurves.cpp
 )
 
-ADD_EXECUTABLE(
-  messycurves_random
-  PerlinNoise.cpp
-  FastNoise.cpp
-  messycurves_random.cpp
-)
-
 TARGET_LINK_LIBRARIES(
   messycurves
-  ${OPENCV_LIBRARIES}
-  ${OpenCV_LIBS}
-)
-
-TARGET_LINK_LIBRARIES(
-  messycurves_random
+  libtinysplinecpp.so
   ${OPENCV_LIBRARIES}
   ${OpenCV_LIBS}
 )
