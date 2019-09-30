@@ -4,6 +4,7 @@
 CMakeFiles/messycurves.dir/FastNoise.o: ../FastNoise.cpp
 CMakeFiles/messycurves.dir/FastNoise.o: ../FastNoise.h
 
+CMakeFiles/messycurves.dir/messycurves.o: ../Draw.cpp
 CMakeFiles/messycurves.dir/messycurves.o: ../FastNoise.h
 CMakeFiles/messycurves.dir/messycurves.o: ../Forces.cpp
 CMakeFiles/messycurves.dir/messycurves.o: ../Mask.cpp

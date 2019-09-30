@@ -7,9 +7,11 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include "tinysplinecpp.h"
+//#include "tinysplinecpp.h"
 #include "Mask.cpp"
 #include "Show.cpp"
+#include "Draw.cpp"
+
 
 using namespace std;
 using namespace cv;
@@ -29,36 +31,36 @@ int main(int argc, const char* argv[])
     //parameters
     int     strokes             =atoi(argv[3]); //2000
     int     maxCount            =atoi(argv[4]); //points in stroke
-    float   maxSpeed=20.; 
-    float   veldamping=.9999;
+    float   maxSpeed            =20.;
+    float   veldamping          =atof(argv[9]);
     //pixelforce
     float   pixelInfluence      =atof(argv[5]);
-    float   tangentInfluence=0.;
-    int     halfperception=1;
-    float   pixeldiv=100.;
+    float   tangentInfluence    =atof(argv[6]);
+    int     halfperception      =2;
+    float   pixeldiv            =100.;
     //fastnoiseforce
     bool    donoiseforce=true;
-    float   noiseInfluence      =atof(argv[6]); //0.5
-    float   zstep               =atof(argv[7]); //0.01
-    float   noisepower=2; // sigmoid
-    float   circularboost=5;
-    int     fnnoisetype=4;
-    int     fnseed=1337;
-    float   fnfrequency=.005;
-    int     fnoctaves=2;
-    float   fnlacunarity=2;
-    float   fngain=0.5;
+    float   noiseInfluence      =atof(argv[7]); //0.5
+    float   zstep               =0.005;
+    float   noisepower          =3; // sigmoid
+    float   circularboost       =5;
+    int     fnnoisetype         =3;
+    int     fnseed              =1337;
+    float   fnfrequency         =.002;
+    int     fnoctaves           =4;
+    float   fnlacunarity        =2;
+    float   fngain              =0.5;
     //boundforce
-    bool    doboundforce=false;
-    float   bound=150;
-    float   boundForceFactor=.3; //0.16;
-    float   boundSuperness=5;
+    bool    doboundforce=true;
+    float   bound=              150;
+    float   boundForceFactor    =atof(argv[8]); //0.5
+    float   boundSuperness      =5;
     //display
-    float   lineopacity=.3;
-    int     lumtreshold=60;
-    float   splinestep=0.01;
+    float   lineopacity         =atof(argv[10]);
+    int     lumtreshold         =60;
+    float   splinestep          =0.01;
     //int     masksampling=50; //undersampling of mask
-    int     output_x=0;
+    int     output_x            =atoi(argv[11]);
     //initialize fastnoise
     //https://github.com/Auburns/FastNoise
     cout << "initializing fast noise"  << endl;
@@ -110,11 +112,13 @@ int main(int argc, const char* argv[])
     Point2f ppos,pos;
     Point2f vel(0.0,0.0);
     Point2f force(0.0,0.0);
-    Point2f pixelforce,tangentforce,boundforce;
+    Point2f pixelforce,tangentforce,noiseforce,boundforce;
+    float maxpixforce=0.;
+    float maxnoiseforce=0.;
     int mcount=0;
     
     //debug
-    bool debug=true;
+    bool debug=false;
     if (debug) {
     //visualizing pixelmask
     imwrite("pixelmask.png",PixelMask);
@@ -131,12 +135,14 @@ int main(int argc, const char* argv[])
     imwrite("fastnoise.png",fastnoisemat);
     cout << "(debug) writing : fastnoise.png" << endl;
     //visualizing forces
-    Mat PixelForceMat=ShowPixelForce(ima_in,5,40,halfperception,pixeldiv);
+    Mat PixelForceMat=ShowPixelForce(ima_in,5,30,halfperception,pixeldiv,maxpixforce);
     imwrite("pixelforce.png",PixelForceMat);
     cout << "(debug) writing : pixelforce.png" << endl;
-    Mat NoiseForceMat=ShowFastNoiseForce(ima_in,5,40,z,noiseInfluence,noisepower,circularboost,fn);
+    cout << "(debug) max pixelforce magnitude : " << maxpixforce << endl;
+    Mat NoiseForceMat=ShowFastNoiseForce(ima_in,5,10,z,noisepower,circularboost,fn,maxnoiseforce);
     imwrite("noiseforce.png",NoiseForceMat);
     cout << "(debug) writing : noiseforce.png" << endl;
+    cout << "(debug) max noiseforce magnitude : " << maxnoiseforce << endl;
     Mat SuperEllipseForceMat=ShowSuperEllipseForce(ima_in,10,5,bound,boundSuperness);
     imwrite("superellipse.png",SuperEllipseForceMat);
     cout << "(debug) writing : superellipse.png" << endl;
@@ -155,7 +161,7 @@ while (true) { //main loop
         //update
         ppos=pos;
         force=force*0.0;
-        vel=vel*veldamping; //wtf?
+        vel=vel*veldamping;
         //add gradient force
         pixelforce=PixelForce(pos,ima_in,halfperception,pixeldiv);
         force=force+(pixelInfluence*pixelforce);
@@ -166,14 +172,22 @@ while (true) { //main loop
         
         //add noise force
         if (donoiseforce) {
+            noiseforce=FastNoiseForce(pos,z,noisepower,circularboost,fn);
+            force=force+(noiseInfluence*noiseforce);
+        /*
         float forcenorm=mag(force);
         if( forcenorm < 0.01) {
-            force=force+(FastNoiseForce(pos,z,noiseInfluence,noisepower,circularboost,fn)*5);
+            noiseforce=FastNoiseForce(pos,z,noisepower,circularboost,fn);
+            force=force+(noiseInfluence*noiseforce*5);
             }  
         else {
-            force=force+FastNoiseForce(pos,z,noiseInfluence,noisepower,circularboost,fn);
+            noiseforce=FastNoiseForce(pos,z,noisepower,circularboost,fn);
+            force=force+(noiseInfluence*noiseforce);
             }
+        */
         }
+        
+        
         
         //add bound force
         if (doboundforce) {
@@ -189,6 +203,7 @@ while (true) { //main loop
         if (normvel > absSpeed) { absSpeed = normvel;}
         if (normvel > maxSpeed) { 
             vel=vel*(maxSpeed/normvel);
+            absSpeed = maxSpeed;
             clampedstroke++;
         }
     
@@ -209,7 +224,9 @@ while (true) { //main loop
     if (!(mcount%100)) {
         cout << "scribbling : " << mcount << "\r" << std::flush;
         }
-        
+      
+    drawCurve(overlay,pointList,ratio,splinestep);
+    /*
     //cout << "nbpoints : " << pointList.size() << endl;
     if (pointList.size() > 3) {  //use bsplines
         tinyspline::BSpline spline(pointList.size());
@@ -218,6 +235,7 @@ while (true) { //main loop
         //fill bspline
         for (int np = 0; np < pointList.size(); np++)
             {
+            //circle(overlay,pointList[np]*ratio,1,(0),1,CV_AA);
             ctrlp[ctrpcount]  = pointList[np].x*ratio;
             ctrpcount++;
             ctrlp[ctrpcount]  = pointList[np].y*ratio;
@@ -246,9 +264,13 @@ while (true) { //main loop
             //circle(overlay,pointList[np]*ratio,2,(20),1,CV_AA);
             }
         }
+    */
     addWeighted(overlay, lineopacity,ima_messy,1-lineopacity,0,ima_messy);
 	if (mcount >= strokes) {
-        cout << "maximum speed : " << absSpeed << " (" << floor(((float)clampedstroke/allstroke)*100) << "% strokes clamped at " << maxSpeed << ")" << endl;
+        //cout << "clampedstrokes : " << clampedstroke << endl;
+        cout << "total strokes : " << allstroke << endl;
+        int clampedstrokepercent=round(100.*(float)clampedstroke/(float)allstroke);
+        cout << "maximum speed : " << absSpeed << " (" << clampedstrokepercent << "% (" << clampedstroke << ") strokes clamped over " << maxSpeed << ")" << endl;
         cout << "writing result : " << image_out_name << endl << endl;
         imwrite(image_out_name,ima_messy);
         return 0;

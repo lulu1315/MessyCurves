@@ -6,6 +6,30 @@
 
 #IncludeRegexTransform: 
 
+/shared/foss/MessyCurves/Draw.cpp
+cstdlib
+-
+opencv2/core.hpp
+/shared/foss/MessyCurves/opencv2/core.hpp
+opencv2/opencv.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+tinysplinecpp.h
+/shared/foss/MessyCurves/tinysplinecpp.h
+
+/shared/foss/MessyCurves/FastNoise.cpp
+FastNoise.h
+/shared/foss/MessyCurves/FastNoise.h
+math.h
+-
+assert.h
+-
+algorithm
+-
+random
+-
+
 /shared/foss/MessyCurves/FastNoise.h
 
 /shared/foss/MessyCurves/Forces.cpp
@@ -69,12 +93,12 @@ opencv2/opencv.hpp
 -
 opencv2/highgui/highgui.hpp
 -
-tinysplinecpp.h
-/shared/foss/MessyCurves/tinysplinecpp.h
 Mask.cpp
 /shared/foss/MessyCurves/Mask.cpp
 Show.cpp
 /shared/foss/MessyCurves/Show.cpp
+Draw.cpp
+/shared/foss/MessyCurves/Draw.cpp
 
 /shared/foss/MessyCurves/tinyspline.h
 stddef.h

@@ -42,7 +42,7 @@ Point2f PixelForce(Point2f pos, Mat ima, int halfperception, float pixeldiv) {
         }
     }
     if (pcount != 0) {
-        gradient=target/(float)pcount;
+        gradient=2*target/(float)pcount;
         }
     else {
         gradient=target;
@@ -50,7 +50,7 @@ Point2f PixelForce(Point2f pos, Mat ima, int halfperception, float pixeldiv) {
     return gradient;
 }
 
-Point2f FastNoiseForce(Point2f pos, float z, float noiseInfluence, float k, float circularboost, FastNoise fn) {
+Point2f FastNoiseForce(Point2f pos, float z, float k, float circularboost, FastNoise fn) {
     //add noise force
     //float circularboost=15.;
     float noise=(sigmoid(fn.GetNoise(pos.x,pos.y,z),k));
@@ -59,7 +59,7 @@ Point2f FastNoiseForce(Point2f pos, float z, float noiseInfluence, float k, floa
     Point2f noisep;
     noisep.x=cos(remapnoise);
     noisep.y=sin(remapnoise);
-    return noisep*noiseInfluence;
+    return noisep;
 }
 
 Point2f BoundForce(Point2f pos, float bound, float boundForceFactor, Mat ima, Mat mask) {

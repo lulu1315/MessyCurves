@@ -9,36 +9,38 @@
 using namespace std;
 using namespace cv;
 
-Mat ShowPixelForce(Mat ima, int sampling, float vscale, float halfperception, float pixeldiv) {
+Mat ShowPixelForce(Mat ima, int sampling, float vscale, float halfperception, float pixeldiv ,float &maxpixforce) {
     int width =ima.cols;
     int height=ima.rows;
     Mat pixelforce(ima.rows, ima.cols, CV_8UC1, Scalar(255));
-    Point2f target,pos;
+    Point2f pixforce,pos;
     for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
             pos.x=j;
             pos.y=i;
-            target=PixelForce(pos,ima,halfperception,pixeldiv)*vscale;
+            pixforce=PixelForce(pos,ima,halfperception,pixeldiv);
+            if (mag(pixforce) > maxpixforce) {maxpixforce = mag(pixforce);}
             if (!(i%sampling) && !(j%sampling)) {
-                line(pixelforce,pos,pos+target,(0),1,CV_AA);
+                line(pixelforce,pos,pos+(pixforce*vscale),(0),1,CV_AA);
                 }
         }
     }
     return pixelforce;
 }
 
-Mat ShowFastNoiseForce(Mat ima, int sampling, float vscale, float z, float noiseInfluence, float k, float circularboost, FastNoise fn) {
+Mat ShowFastNoiseForce(Mat ima, int sampling, float vscale, float z, float k, float circularboost, FastNoise fn ,float &maxnoiseforce) {
     int width =ima.cols;
     int height=ima.rows;
     Mat noiseforce(ima.rows, ima.cols, CV_8UC1, Scalar(255));
-    Point2f target,pos;
+    Point2f noiforce,pos;
     for (int i = 0; i < height; i++) {
 		for (int j = 0; j < width; j++) {
             pos.x=j;
             pos.y=i;
-            target=FastNoiseForce(pos,z,noiseInfluence,k,circularboost,fn)*vscale;
+            noiforce=FastNoiseForce(pos,z,k,circularboost,fn);
+            if (mag(noiforce) > maxnoiseforce) {maxnoiseforce = mag(noiforce);}
             if (!(i%sampling) && !(j%sampling)) {
-                line(noiseforce,pos,pos+target,(0),1,CV_AA);
+                line(noiseforce,pos,pos+(noiforce*vscale),(0),1,CV_AA);
                 }
         }
     }

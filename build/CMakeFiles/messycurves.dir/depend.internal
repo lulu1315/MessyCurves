@@ -5,6 +5,7 @@ CMakeFiles/messycurves.dir/FastNoise.o
  /shared/foss/MessyCurves/FastNoise.cpp
  /shared/foss/MessyCurves/FastNoise.h
 CMakeFiles/messycurves.dir/messycurves.o
+ /shared/foss/MessyCurves/Draw.cpp
  /shared/foss/MessyCurves/FastNoise.h
  /shared/foss/MessyCurves/Forces.cpp
  /shared/foss/MessyCurves/Mask.cpp
