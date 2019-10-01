@@ -4,20 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/shared/foss/MessyCurves/FastNoise.cpp" "/shared/foss/MessyCurves/build/CMakeFiles/messycurves.dir/FastNoise.o"
-  "/shared/foss/MessyCurves/messycurves.cpp" "/shared/foss/MessyCurves/build/CMakeFiles/messycurves.dir/messycurves.o"
+  "/shared/foss-18/MessyCurves/FastNoise.cpp" "/shared/foss-18/MessyCurves/build/CMakeFiles/messycurves.dir/FastNoise.o"
+  "/shared/foss-18/MessyCurves/messycurves.cpp" "/shared/foss-18/MessyCurves/build/CMakeFiles/messycurves.dir/messycurves.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "OPENCV_TRAITS_ENABLE_DEPRECATED"
-  )
-
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/local/include"
-  "/usr/local/include/opencv"
+  "/usr/include/opencv"
   )
 
 # Targets to which this target links.
