@@ -12,13 +12,13 @@ INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 LINK_DIRECTORIES(${OpenCV_LIB_DIR})
 
 ADD_EXECUTABLE(
-  messycurves
+  stipplecurves
   FastNoise.cpp
-  messycurves.cpp
+  stipplecurves.cpp
 )
 
 TARGET_LINK_LIBRARIES(
-  messycurves
+  stipplecurves
   ${TINYSPLINE}
   ${OPENCV_LIBRARIES}
   ${OpenCV_LIBS}

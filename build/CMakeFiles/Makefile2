@@ -65,39 +65,39 @@ CMAKE_SOURCE_DIR = /shared/foss-18/MessyCurves
 CMAKE_BINARY_DIR = /shared/foss-18/MessyCurves/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/messycurves.dir
+# Target rules for target CMakeFiles/stipplecurves.dir
 
 # All Build rule for target.
-CMakeFiles/messycurves.dir/all:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/depend
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/shared/foss-18/MessyCurves/build/CMakeFiles --progress-num=1,2,3 "Built target messycurves"
-.PHONY : CMakeFiles/messycurves.dir/all
+CMakeFiles/stipplecurves.dir/all:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/depend
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/shared/foss-18/MessyCurves/build/CMakeFiles --progress-num=1,2,3 "Built target stipplecurves"
+.PHONY : CMakeFiles/stipplecurves.dir/all
 
 # Include target in all.
-all: CMakeFiles/messycurves.dir/all
+all: CMakeFiles/stipplecurves.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/messycurves.dir/rule: cmake_check_build_system
+CMakeFiles/stipplecurves.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /shared/foss-18/MessyCurves/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/messycurves.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/stipplecurves.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /shared/foss-18/MessyCurves/build/CMakeFiles 0
-.PHONY : CMakeFiles/messycurves.dir/rule
+.PHONY : CMakeFiles/stipplecurves.dir/rule
 
 # Convenience name for target.
-messycurves: CMakeFiles/messycurves.dir/rule
+stipplecurves: CMakeFiles/stipplecurves.dir/rule
 
-.PHONY : messycurves
-
-# clean rule for target.
-CMakeFiles/messycurves.dir/clean:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/clean
-.PHONY : CMakeFiles/messycurves.dir/clean
+.PHONY : stipplecurves
 
 # clean rule for target.
-clean: CMakeFiles/messycurves.dir/clean
+CMakeFiles/stipplecurves.dir/clean:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/clean
+.PHONY : CMakeFiles/stipplecurves.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/stipplecurves.dir/clean
 
 .PHONY : clean
 

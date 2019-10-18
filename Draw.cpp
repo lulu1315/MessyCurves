@@ -9,8 +9,10 @@
 using namespace std;
 using namespace cv;
 
-void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splinestep) {
-    if (pointList.size() > 3) {  //use bsplines
+void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splinestep, float size, float colorpower) {
+    bool forcelines=false;
+    float decreasesize,increasecolor;
+    if ((pointList.size() > 3) && (!forcelines)) {  //use bsplines
         tinyspline::BSpline spline(pointList.size());
         vector<tinyspline::real> ctrlp = spline.controlPoints();
         int ctrpcount=0;
@@ -34,7 +36,10 @@ void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splin
             splinepointi.y=resulti[1];
             splinepointj.x=resultj[0];
             splinepointj.y=resultj[1];
-            line(overlay,splinepointi,splinepointj,(0),1,CV_AA);
+            decreasesize=size*(1-u);
+            increasecolor=pow(u,colorpower);
+            line(overlay,splinepointi,splinepointj,((int)255.*increasecolor),size,CV_AA);
+            //line(overlay,splinepointi,splinepointj,(0),size,CV_AA);
             //circle(overlay,splinepoint,1,(0),1,CV_AA);
             }
         }
@@ -42,7 +47,7 @@ void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splin
         {
         for (int np = 0; np < pointList.size()-1; np++)
             {
-            line(overlay,pointList[np]*ratio,pointList[np+1]*ratio,(0),1,CV_AA);
+            line(overlay,pointList[np]*ratio,pointList[np+1]*ratio,(0),size,CV_AA);
             //circle(overlay,pointList[np]*ratio,2,(20),1,CV_AA);
             }
         }

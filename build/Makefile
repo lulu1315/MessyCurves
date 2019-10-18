@@ -111,47 +111,47 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named messycurves
+# Target rules for targets named stipplecurves
 
 # Build rule for target.
-messycurves: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 messycurves
-.PHONY : messycurves
+stipplecurves: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 stipplecurves
+.PHONY : stipplecurves
 
 # fast build rule for target.
-messycurves/fast:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/build
-.PHONY : messycurves/fast
+stipplecurves/fast:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/build
+.PHONY : stipplecurves/fast
 
 # target to build an object file
 FastNoise.o:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/FastNoise.o
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/FastNoise.o
 .PHONY : FastNoise.o
 
 # target to preprocess a source file
 FastNoise.i:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/FastNoise.i
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/FastNoise.i
 .PHONY : FastNoise.i
 
 # target to generate assembly for a file
 FastNoise.s:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/FastNoise.s
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/FastNoise.s
 .PHONY : FastNoise.s
 
 # target to build an object file
-messycurves.o:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/messycurves.o
-.PHONY : messycurves.o
+stipplecurves.o:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/stipplecurves.o
+.PHONY : stipplecurves.o
 
 # target to preprocess a source file
-messycurves.i:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/messycurves.i
-.PHONY : messycurves.i
+stipplecurves.i:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/stipplecurves.i
+.PHONY : stipplecurves.i
 
 # target to generate assembly for a file
-messycurves.s:
-	$(MAKE) -f CMakeFiles/messycurves.dir/build.make CMakeFiles/messycurves.dir/messycurves.s
-.PHONY : messycurves.s
+stipplecurves.s:
+	$(MAKE) -f CMakeFiles/stipplecurves.dir/build.make CMakeFiles/stipplecurves.dir/stipplecurves.s
+.PHONY : stipplecurves.s
 
 # Help Target
 help:
@@ -160,14 +160,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... messycurves"
+	@echo "... stipplecurves"
 	@echo "... edit_cache"
 	@echo "... FastNoise.o"
 	@echo "... FastNoise.i"
 	@echo "... FastNoise.s"
-	@echo "... messycurves.o"
-	@echo "... messycurves.i"
-	@echo "... messycurves.s"
+	@echo "... stipplecurves.o"
+	@echo "... stipplecurves.i"
+	@echo "... stipplecurves.s"
 .PHONY : help
 
 

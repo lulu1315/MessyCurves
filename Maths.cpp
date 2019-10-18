@@ -16,6 +16,12 @@ float sigmoid(float x,float k)
     return 1.0 / (1.0 + (float)exp(-k * x));
 }
 
+float range(float value, float low1, float high1, float low2, float high2) {
+    //https://stackoverflow.com/questions/3451553/value-remapping
+    float ranged_val=low2 + (value - low1) * (high2 - low2) / (high1 - low1);
+    return ranged_val;
+}
+
 float power(float x,float k)
 {
     if (x < 0) {
