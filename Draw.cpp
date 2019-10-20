@@ -9,8 +9,8 @@
 using namespace std;
 using namespace cv;
 
-void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splinestep, float size, float colorpower) {
-    bool forcelines=false;
+void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splinestep, float size, float colorpower, bool forcelines) {
+    float decreasepower=colorpower;
     float decreasesize,increasecolor;
     if ((pointList.size() > 3) && (!forcelines)) {  //use bsplines
         tinyspline::BSpline spline(pointList.size());
@@ -36,9 +36,11 @@ void drawCurve(Mat &overlay, vector<Point2f> pointList, float ratio, float splin
             splinepointi.y=resulti[1];
             splinepointj.x=resultj[0];
             splinepointj.y=resultj[1];
-            decreasesize=size*(1-u);
+            //decreasesize=max(size*pow((1.-u),decreasepower),1.);
+            decreasesize=range(pow((u),decreasepower),0,1,size,1);
+            //cout << "decreasesize : " << decreasesize << endl;
             increasecolor=pow(u,colorpower);
-            line(overlay,splinepointi,splinepointj,((int)255.*increasecolor),size,CV_AA);
+            line(overlay,splinepointi,splinepointj,((int)255.*increasecolor),decreasesize,CV_AA);
             //line(overlay,splinepointi,splinepointj,(0),size,CV_AA);
             //circle(overlay,splinepoint,1,(0),1,CV_AA);
             }

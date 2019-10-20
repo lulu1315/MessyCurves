@@ -29,11 +29,9 @@ int main(int argc, const char* argv[])
     image_in_name               = argv[2];
     image_out_name              = argv[3];
     int     maxCount            =atoi(argv[4]); //points in stroke
-    cout << "\033[1;32m(params)\033[0m strokes per point : " << maxCount << endl;
     //pixelforce
     bool    dopixelforce        =atoi(argv[5]);
     float   pixelInfluence      =atof(argv[6]);
-    if (dopixelforce) {cout << "\033[1;32m(params)\033[0m using pixelforce (" << pixelInfluence << ")" << endl;}
     float   minpixforce         =atof(argv[7]);
     int     halfperception      =atoi(argv[8]); //2
     float   pixeldiv            =100.;
@@ -49,7 +47,6 @@ int main(int argc, const char* argv[])
     bool    donoiseforce        =atoi(argv[15]);
     bool    docurlnoise         =atoi(argv[16]);
     float   noiseInfluence      =atof(argv[17]);
-    if (donoiseforce) {cout << "\033[1;32m(params)\033[0m using noiseforce (" << noiseInfluence << ")" << endl;}
     float   zstep               =atof(argv[18]);
     float   noisepower          =3;
     float   circularboost       =5;
@@ -65,8 +62,7 @@ int main(int argc, const char* argv[])
     float   boundForceFactor    =atof(argv[23]);
     float   boundSuperness      =5;
     //colinear
-    bool   colinearlimit       =atoi(argv[24]);
-    if (colinearlimit) {cout << "\033[1;32m(params)\033[0m colinear limit on ..." << endl;}
+    float   colinearlimit       =atof(argv[24]);
     //display
     float   maxSpeed            =atof(argv[25]); //2000
     float   lineopacity         =atof(argv[26]); //.5
@@ -139,7 +135,6 @@ int main(int argc, const char* argv[])
     //initialize
     float   absSpeed=0.;
     int     clampedstroke=0;
-    int     colinearstroke=0;
     int     allstroke=0;
     float   z=0;
     float dragcoefficient;
@@ -188,50 +183,50 @@ int main(int argc, const char* argv[])
             fastnoisemat.at<uchar>(i, j)=(sigmoid(fn.GetNoise(j,i,1),noisepower))*255.;
         }
     }
-    cout << "\033[1;34m(debug)\033[0m writing : fastnoise.png" << endl;
-    imwrite("debug_fastnoise.png",fastnoisemat);
+    cout << "(debug) writing : fastnoise.png" << endl;
+    imwrite("fastnoise.png",fastnoisemat);
     //visualizing pixel force
     float maxpixforce=0.;
     Mat PixelForceMat=ShowPixelForce(ima_in,sampling,vscale,halfperception,pixeldiv,maxpixforce);
-    imwrite("debug_pixelforce.png",PixelForceMat);
-    cout << "\033[1;34m(debug)\033[0m writing : pixelforce.png" << endl;
-    cout << "\033[1;34m(debug)\033[0m max pixelforce magnitude : " << maxpixforce << endl;
+    imwrite("pixelforce.png",PixelForceMat);
+    cout << "(debug) writing : pixelforce.png" << endl;
+    cout << "(debug) max pixelforce magnitude : " << maxpixforce << endl;
     Mat PixelForceAngleMat=ShowPixelForceAngle(ima_in,halfperception,pixeldiv,maxpixforce);
-    imwrite("debug_pixelforceangle.png",PixelForceAngleMat);
-    cout << "\033[1;34m(debug)\033[0m writing : pixelforceangle.png" << endl;
+    imwrite("pixelforceangle.png",PixelForceAngleMat);
+    cout << "(debug) writing : pixelforceangle.png" << endl;
     //visualizing noise force
     float maxnoiseforce=0.;
     Mat NoiseForceMat=ShowFastNoiseForce(ima_in,sampling,vscale,z,noisepower,circularboost,fn,docurlnoise,maxnoiseforce);
     if (docurlnoise) {
-        imwrite("debug_noiseforce.png",NoiseForceMat);
-        cout << "\033[1;34m(debug)\033[0m writing : (curl) noiseforce.png" << endl;
+        imwrite("noiseforce.png",NoiseForceMat);
+        cout << "(debug) writing : (curl) noiseforce.png" << endl;
         }
     else {
-        imwrite("debug_noiseforce.png",NoiseForceMat);
-        cout << "\033[1;34m(debug)\033[0m writing : (nocurl) noiseforce.png" << endl;
+        imwrite("noiseforce.png",NoiseForceMat);
+        cout << "(debug) writing : (nocurl) noiseforce.png" << endl;
         }
-    cout << "\033[1;34m(debug)\033[0m max noiseforce magnitude : " << maxnoiseforce << endl;
+    cout << "(debug) max noiseforce magnitude : " << maxnoiseforce << endl;
     //visualizing bounding force
     float maxboundforce=0.;
     Mat SuperEllipseForceMat=ShowSuperEllipseForce(ima_in,sampling,vscale,bound,boundSuperness,maxboundforce);
-    imwrite("debug_superellipse.png",SuperEllipseForceMat);
-    cout << "\033[1;34m(debug)\033[0m writing : superellipse.png" << endl;
-    cout << "\033[1;34m(debug)\033[0m max boundforce magnitude : " << maxboundforce << endl;
+    imwrite("superellipse.png",SuperEllipseForceMat);
+    cout << "(debug) writing : superellipse.png" << endl;
+    cout << "(debug) max boundforce magnitude : " << maxboundforce << endl;
     //visualizing gradient force
     float maxgradientforce=0.;
     Mat GradientForceMat=ShowGradientForce(dx,dy,sampling,vscale,maxgradientforce);
-    imwrite("debug_gradient.png",GradientForceMat);
-    cout << "\033[1;34m(debug)\033[0m writing : gradient.png" << endl;
-    cout << "\033[1;34m(debug)\033[0m max gradientforce magnitude : " << maxgradientforce << endl;
+    imwrite("gradient.png",GradientForceMat);
+    cout << "(debug) writing : gradient.png" << endl;
+    cout << "(debug) max gradientforce magnitude : " << maxgradientforce << endl;
     //visualising gradient norm
-    imwrite("debug_gradientnorm.png",sobel_mag);
-    cout << "\033[1;34m(debug)\033[0m writing : gradientnorm.png" << endl;
+    imwrite("gradientnorm.png",sobel_mag);
+    cout << "(debug) writing : gradientnorm.png" << endl;
     //visualizing curl force
     float maxcurlforce=0.;
     Mat CurlForceMat=ShowCurlForce(ima_in_blur,sampling,vscale,maxcurlforce);
-    imwrite("debug_curlforce.png",CurlForceMat);
-    cout << "\033[1;34m(debug)\033[0m writing : curlforce.png" << endl;
-    cout << "\033[1;34m(debug)\033[0m max curlforce magnitude : " << maxcurlforce << endl;
+    imwrite("curlforce.png",CurlForceMat);
+    cout << "(debug) writing : curlforce.png" << endl;
+    cout << "(debug) max curlforce magnitude : " << maxcurlforce << endl;
     }
 
 //stroke
@@ -296,14 +291,12 @@ for(int st=0; st<strokes; st++) {//main loop
             
         vel=vel+force;
         
-        if (colinearlimit) {
-            float colinear=colineardamping(previousforce,vel);
-            if (colinear == 1 && step != 0) {
-                pointList.push_back(pos);
-                colinearstroke++;
-                break;
-                //vel=vel*colineardamp;
-            }
+        float colinear=colineardamping(previousforce,vel);
+        //if (colinear > colinearlimit && step != 0) {
+        if (colinear == 1 && step != 0) {
+            pointList.push_back(pos);
+            break;
+            //vel=vel*colineardamp;
         }
         previousforce=vel;
         
@@ -338,10 +331,9 @@ for(int st=0; st<strokes; st++) {//main loop
     
 //finished !
 cout << endl;
-cout << "\033[1;33m(statistics)\033[0m total strokes : " << allstroke << endl;
+cout << "total strokes : " << allstroke << endl;
 int clampedstrokepercent=round(100.*(float)clampedstroke/(float)allstroke);
-cout << "\033[1;33m(statistics)\033[0m maximum speed : " << absSpeed << " (" << clampedstrokepercent << "% (" << clampedstroke << ") strokes clamped over " << maxSpeed << ")" << endl;
-cout << "\033[1;33m(statistics)\033[0m colinear blocked strokes : " << colinearstroke << endl;
+cout << "maximum speed : " << absSpeed << " (" << clampedstrokepercent << "% (" << clampedstroke << ") strokes clamped over " << maxSpeed << ")" << endl;
 //resize ima_messy
 resize(ima_messy, ima_messy, Size(width*ratio,height*ratio), 0, 0, INTER_AREA);
 cout << "writing result : " << image_out_name << endl << endl;
